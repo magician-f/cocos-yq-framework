@@ -1,4 +1,5 @@
 import { common_on_click } from "../../src/scene/common_on_click";
+import yq_base_ui_cp from "./ui/yq_base_ui_cp";
 import yq_base_sys from "./yq_base_sys";
 
 export interface ui_data_define {
@@ -10,7 +11,7 @@ export interface ui_data_define {
     prefab_id: string,
 
     //类型 
-    type: "layer" | "notify" | "tip" | "mask" | "toast"
+    type: "layer" | "notify" | "tips" | "mask" | "toast"
 
 }
 interface ui_stack_define {
@@ -80,8 +81,18 @@ export default class yq_ui_sys extends yq_base_sys<ui_data_define> {
         return ui_data
     }
 
+    private _show(node: cc.Node, id: string, option?: any) {
+        const cp = node.getComponent(yq_base_ui_cp);
+        if (cp) {
+            cp.set_data(option);
+        } else {
+            console.log(`ui.open id [${id}] no find ${yq_base_ui_cp.name}`)
+        }
+        node.active = true;
+    }
+
     /** 打开一个新的页面 */
-    public async open(id: string) {
+    public async open(id: string, option?: any) {
         const ui_data = this._get_data(id);
         if (!ui_data) {
             return
@@ -95,34 +106,85 @@ export default class yq_ui_sys extends yq_base_sys<ui_data_define> {
         }
         //添加到栈中
         const cur_stack_list = this._get_cur_scene_stack();
-        cur_stack_list.push({
-            node: node,
-            ui_id: id
-        })
+        switch (ui_data.type) {
+            case "layer":
+            case "notify":
+            case "mask":
+                cur_stack_list.push({
+                    node: node,
+                    ui_id: id
+                })
+            case "tips":
+            case "toast":
+                break;
+            default:
+                throw new Error(`un.open undefined type [${ui_data.type}]`)
+        }
+
+        let zIndex = 0;
+        switch (ui_data.type) {
+            case "layer":
+                zIndex = 10;
+                break;
+            case "notify":
+                zIndex = 20;
+                break;
+            case "tips":
+                zIndex = 30;
+                break;
+            case "mask":
+                zIndex = 40;
+                break;
+            case "toast":
+                zIndex = 50;
+                break;
+            default:
+                throw new Error(`un.open undefined type [${ui_data.type}]`)
+        }
+        node.zIndex = zIndex;
+        node.active = false;
         //添加到根节点
         this._get_root_node().addChild(node);
+        this._show(node, id, option);
     }
 
     /** 
      * 前往某个页面，并关掉所有在他之上的页面
      * 如果不存在就新建一个
      */
-    public async go_to(id: string) {
+    public async go_to(id: string, option?: any) {
         const cur_stack_list = this._get_cur_scene_stack();
         for (let i = cur_stack_list.length - 1; i >= 0; i--) {
             const data = cur_stack_list[i];
             if (data.ui_id == id) {
-                //找到了,激活这个节点
-                data.node.active = true;
                 while (cur_stack_list.length - 1 > i) {
                     const data = cur_stack_list.pop()
                     data.node.destroy();
                 }
+                //找到了,激活这个节点
+                this._show(data.node, id, option);
                 return;
             }
 
         }
-        await this.open(id);
+        await this.open(id, option);
+    }
+
+    /**
+     * 打开一个页面，如果没有创建，如果有移动到栈顶
+     */
+    public async open_to_top(id: string, option?: any) {
+        const cur_stack_list = this._get_cur_scene_stack();
+        for (let i = cur_stack_list.length - 1; i >= 0; i--) {
+            const data = cur_stack_list[i];
+            if (data.ui_id == id) {
+                cur_stack_list.splice(i, 1);
+                cur_stack_list.push(data);
+                this._show(data.node, id, option);
+                return;
+            }
+        }
+        await this.open(id, option);
     }
 
     /** 关闭当前页面 */
@@ -130,11 +192,8 @@ export default class yq_ui_sys extends yq_base_sys<ui_data_define> {
         const cur_stack_list = this._get_cur_scene_stack();
         if (cur_stack_list.length) {
             const data = cur_stack_list.pop();
-
-            //todo 临时代码
-            const anim_cp = data.node.getComponent(common_on_click);
+            const anim_cp = data.node.getComponent(yq_base_ui_cp);
             if (anim_cp) {
-                //单次back的页面，做一个动画
                 anim_cp.on_close_anim(() => {
                     data.node.destroy();
                 })

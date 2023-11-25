@@ -1107,7 +1107,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 85.31,
+      "width": 138.66,
       "height": 90.4
     },
     "_anchorPoint": {
@@ -1159,8 +1159,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "升级\n(页面)",
-    "_N$string": "升级\n(页面)",
+    "_string": "升级-新开\n(页面)",
+    "_N$string": "升级-新开\n(页面)",
     "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -1517,7 +1517,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 85.31,
+      "width": 138.66,
       "height": 90.4
     },
     "_anchorPoint": {
@@ -1569,8 +1569,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "活动\n(页面)",
-    "_N$string": "活动\n(页面)",
+    "_string": "活动-新开\n(页面)",
+    "_N$string": "活动-新开\n(页面)",
     "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -2288,7 +2288,7 @@
         "__id__": 68
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 78

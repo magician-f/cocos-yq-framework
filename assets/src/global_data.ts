@@ -24,6 +24,21 @@ class global_data {
             bundle_name: "activity",
             res_path: "ui/activity_layer"
         },
+        "tips": {
+            id: "tips",
+            bundle_name: "common",
+            res_path: "ui/tips"
+        },
+        "mask": {
+            id: "mask",
+            bundle_name: "common",
+            res_path: "ui/mask"
+        },
+        "toast": {
+            id: "toast",
+            bundle_name: "common",
+            res_path: "ui/toast"
+        },
     }
 
     ui_table: table_data_define<ui_data_define> = {
@@ -41,6 +56,21 @@ class global_data {
             id: "settle",
             prefab_id: "settle_layer",
             type: "layer"
+        },
+        "tips": {
+            id: "tips",
+            prefab_id: "tips",
+            type: "tips"
+        },
+        "mask": {
+            id: "mask",
+            prefab_id: "mask",
+            type: "mask"
+        },
+        "toast": {
+            id: "toast",
+            prefab_id: "toast",
+            type: "toast"
         },
     }
 }

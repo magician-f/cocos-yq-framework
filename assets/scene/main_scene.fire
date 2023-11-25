@@ -2004,7 +2004,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_tip",
+    "_name": "btn_tips",
     "_objFlags": 0,
     "_parent": {
       "__id__": 40
@@ -2248,7 +2248,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
+      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -2304,7 +2304,7 @@
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [],
-    "_N$interactable": false,
+    "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 2,
     "transition": 2,
@@ -2585,8 +2585,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "模拟\n(通知)",
-    "_N$string": "模拟\n(通知)",
+    "_string": "通知\n(通知)",
+    "_N$string": "通知\n(通知)",
     "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -2956,8 +2956,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "模拟\n(遮罩)",
-    "_N$string": "模拟\n(遮罩)",
+    "_string": "遮罩\n(遮罩)",
+    "_N$string": "遮罩\n(遮罩)",
     "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -2990,7 +2990,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
+      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -3046,7 +3046,7 @@
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [],
-    "_N$interactable": false,
+    "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 2,
     "transition": 2,
@@ -3327,8 +3327,8 @@
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_string": "模拟\n(飘字)",
-    "_N$string": "模拟\n(飘字)",
+    "_string": "飘字\n(飘字)",
+    "_N$string": "飘字\n(飘字)",
     "_fontSize": 32,
     "_lineHeight": 40,
     "_enableWrapText": false,
@@ -3361,7 +3361,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
+      "__uuid__": "f0048c10-f03e-4c97-b9d3-3506e1d58952"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -3417,7 +3417,7 @@
     "duration": 0.1,
     "zoomScale": 1.2,
     "clickEvents": [],
-    "_N$interactable": false,
+    "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$transition": 2,
     "transition": 2,

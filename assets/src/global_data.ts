@@ -2,6 +2,10 @@ import { table_data_define } from "../yq/sys/yq_base_sys";
 import { prefab_data_define } from "../yq/sys/yq_prefab_sys";
 import { ui_data_define } from "../yq/sys/yq_ui_sys";
 
+/**
+ * todo 配置模块未开发，手动配置数据
+ * 手动维护json数据，仅适合体量很小的项目
+ */
 class global_data {
 
     prefab_table: table_data_define<prefab_data_define> = {

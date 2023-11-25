@@ -28,9 +28,7 @@ export default class debug extends cc.Component {
             let str = "";
             for (let k in yq.ui._ui_stack_data) {
                 const list = yq.ui._ui_stack_data[k];
-                if (k == cc.director.getScene().name) {
-                    str += `[scene] - ${k}\n`;
-                }
+                str += `[scene] - ${k}\n`;
                 for (let i = 0; i < list.length; i++) {
                     const data = list[i];
                     str += `[${data.node.active ? "显" : "隐"}] - ${data.ui_id}\n`

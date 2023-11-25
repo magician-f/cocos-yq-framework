@@ -13,7 +13,6 @@ const { ccclass, property } = cc._decorator;
 export default class main_scene extends cc.Component {
 
     onLoad() {
-        console.log("onLoad");
         yq.ui.set_table_data(global_data.ui_table);
         yq.prefab.set_table_data(global_data.prefab_table);
     }

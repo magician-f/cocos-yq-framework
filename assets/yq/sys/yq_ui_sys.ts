@@ -1,3 +1,4 @@
+import { common_on_click } from "../../src/scene/common_on_click";
 import yq_base_sys from "./yq_base_sys";
 
 export interface ui_data_define {
@@ -8,8 +9,8 @@ export interface ui_data_define {
     //预制id
     prefab_id: string,
 
-    //类型
-    type: "layer" | "notify" | "tip" | "mask"
+    //类型 
+    type: "layer" | "notify" | "tip" | "mask" | "toast"
 
 }
 interface ui_stack_define {
@@ -65,6 +66,12 @@ export default class yq_ui_sys extends yq_base_sys<ui_data_define> {
         return this._ui_stack_data[scene_name];
     }
 
+    /** 当前场景是否存在栈数据 */
+    private _has_cur_scene_stack(): boolean {
+        let scene_name = cc.director.getScene().name;
+        return !!this._ui_stack_data[scene_name]
+    }
+
     private _get_data(id: string) {
         const ui_data = this.table_data[id];
         if (!ui_data) {
@@ -108,7 +115,8 @@ export default class yq_ui_sys extends yq_base_sys<ui_data_define> {
                 //找到了,激活这个节点
                 data.node.active = true;
                 while (cur_stack_list.length - 1 > i) {
-                    cur_stack_list.pop().node.destroy();
+                    const data = cur_stack_list.pop()
+                    data.node.destroy();
                 }
                 return;
             }
@@ -121,22 +129,36 @@ export default class yq_ui_sys extends yq_base_sys<ui_data_define> {
     public back() {
         const cur_stack_list = this._get_cur_scene_stack();
         if (cur_stack_list.length) {
-            const data = cur_stack_list.pop()
-            data.node.destroy();
+            const data = cur_stack_list.pop();
+
+            //todo 临时代码
+            const anim_cp = data.node.getComponent(common_on_click);
+            if (anim_cp) {
+                //单次back的页面，做一个动画
+                anim_cp.on_close_anim(() => {
+                    data.node.destroy();
+                })
+            } else {
+                data.node.destroy();
+            }
         }
     }
 
     /** 关闭当前场景的所有页面 */
-    public close_cur_scene_all() {
-        const cur_stack_list = this._get_cur_scene_stack();
-        if (cur_stack_list.length) {
-            const data = cur_stack_list.pop()
+    public close_scene_all(scene_name: string) {
+        const cur_stack_list = this._ui_stack_data[scene_name] || [];
+        for (let k in cur_stack_list) {
+            const data = cur_stack_list[k];
             data.node.destroy();
         }
+        delete this._ui_stack_data[scene_name];
     }
 
-    /** 隐藏当前所有场景 */
+    /** 隐藏当前场景所有页面 */
     public hide_cur_scene_all() {
+        if (!this._has_cur_scene_stack()) {
+            return
+        }
         const cur_stack_list = this._get_cur_scene_stack();
         for (let k in cur_stack_list) {
             const data = cur_stack_list[k];

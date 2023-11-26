@@ -126,13 +126,13 @@ export default class yq_ui_sys extends yq_base_sys<ui_data_define> {
             case "layer":
                 zIndex = 10;
                 break;
-            case "notify":
+            case "tips":
                 zIndex = 20;
                 break;
-            case "tips":
+            case "mask":
                 zIndex = 30;
                 break;
-            case "mask":
+            case "notify":
                 zIndex = 40;
                 break;
             case "toast":
